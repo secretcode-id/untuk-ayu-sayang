@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Untuk Kamu ❤️</title>
+    <style>
+        /* Cursor Kucing Calico */
+        * { cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' style='font-size:24px'><text y='24'>🐱</text></svg>"), auto; }
+
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background-color: #ffc5d3; /* Pastel Pink */
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+            padding: 20px 0; /* Jaga jarak atas bawah di HP */
+        }
+
+        /* CONTAINER UTAMA: Sekarang pake Flexbox biar fleksibel */
+        .main-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 20px; /* Jarak dari pinggir layar HP */
+        }
+
+        /* LAPISAN 1: Background Blur (Otomatis Ngikutin Konten) */
+        .glass-bg {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.3); 
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 4px solid #fff;
+            width: 100%;
+            max-width: 380px;
+            height: 100%; /* Dia bakal narik ngikutin pembungkusnya */
+            border-radius: 20px;
+            z-index: 5; 
+            box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.05);
+        }
+
+        /* LAPISAN 2: Hujan Bunga */
+        .sunflower {
+            position: fixed;
+            top: -100px;
+            z-index: 10; 
+            user-select: none;
+            pointer-events: none;
+            animation: fall linear forwards;
+        }
+
+        /* LAPISAN 3: Konten Tulisan (Pusat Kendali Ukuran) */
+        .content-overlay {
+            position: relative;
+            z-index: 20; 
+            text-align: center;
+            padding: 40px 25px;
+            max-width: 350px;
+            width: 100%;
+            box-sizing: border-box; /* Biar padding gak nambah lebar */
+        }
+
+        .btn-pixel {
+            background-color: #ffffff;
+            color: #000;
+            border: 4px solid #000;
+            padding: 15px 20px;
+            font-weight: bold;
+            text-transform: uppercase;
+            box-shadow: 4px 4px 0 #000;
+            cursor: pointer;
+            margin-top: 25px;
+            pointer-events: auto;
+            touch-action: manipulation;
+        }
+
+        @keyframes fall {
+            to { transform: translateY(120vh) rotate(360deg); }
+        }
+
+        /* POP UP */
+        #popup {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 500;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup-pixel-content {
+            background: #fff;
+            border: 5px solid #000;
+            padding: 30px;
+            text-align: center;
+            width: 80%;
+            max-width: 300px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-wrapper">
+        <!-- Background ini sekarang bakal ngikutin tinggi konten di depannya -->
+        <div class="glass-bg"></div>
+
+        <div class="content-overlay">
+            <h1 style="color: #fff; text-shadow: 2px 2px #ff8fa3; font-size: 24px;">DEAR SAYANG... ❤️</h1>
+            
+            <p style="color: #444; font-size: 15px; line-height: 1.6; text-align: justify; margin-bottom: 0;">
+                <!-- Masukin teks lo yang sepanjang kereta api di sini -->
+                Halo sayang, maaf ya aku baru chat sekarang. Aku beneran minta maaf soal yang kemarin, aku nggak bermaksud bikin kamu kesel. Aku belajar bikin ginian dari semalem cuma buat minta maaf ke kamu dengan cara yang beda. Semoga kamu suka ya sama hujan bunga mataharinya, soalnya aku tau kamu suka banget sama bunga. Jangan marah lagi ya? Aku janji bakal dengerin kamu lebih baik lagi ke depannya. I love you so much! ❤️
+            </p>
+
+            <button class="btn-pixel" onclick="showPopup()">DIMAAFIN KOK</button>
+        </div>
+    </div>
+
+    <div id="popup">
+        <div class="popup-pixel-content">
+            <div style="font-size: 50px;">❤️</div>
+            <h2 style="font-size: 20px;">YEAY! MAKASIH!</h2>
+            <p style="font-size: 14px;">I promise to be better. <br> Love you always!</p>
+            <button class="btn-pixel" style="font-size: 12px; background: #ffc5d3;" onclick="closePopup()">CLOSE</button>
+        </div>
+    </div>
+
+    <script>
+        function createSunflower() {
+            const flower = document.createElement('div');
+            flower.classList.add('sunflower');
+            flower.innerText = '🌻';
+            flower.style.left = Math.random() * 100 + "vw";
+            const size = Math.random() * 25 + 35; 
+            flower.style.fontSize = size + "px";
+            flower.style.opacity = Math.random() * 0.4 + 0.6;
+            const duration = Math.random() * 3 + 3;
+            flower.style.animationDuration = duration + "s";
+            document.body.appendChild(flower);
+            setTimeout(() => { flower.remove(); }, duration * 1000);
+        }
+
+        setInterval(createSunflower, 180);
+
+        function showPopup() { document.getElementById('popup').style.display = 'flex'; }
+        function closePopup() { document.getElementById('popup').style.display = 'none'; }
+    </script>
+</body>
+</html>
